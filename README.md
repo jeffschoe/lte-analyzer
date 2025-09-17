@@ -6,7 +6,7 @@ I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems
 
 # Requirements 
 - uv
-- pandas
+- pandas, pip install pandas
 
 # usage
 1. add cellular signal reports in the reports/ directory
