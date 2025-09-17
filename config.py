@@ -1,2 +1,3 @@
 REPORTS_PATH = "./reports"
 RESULTS_PATH = "./results"
+RESULT_FILE_NAME_SUFFIX = "RESULT"
