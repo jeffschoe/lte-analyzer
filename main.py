@@ -3,7 +3,11 @@ import os
 import shutil
 import pandas as pd
 
-from config import REPORTS_PATH, RESULTS_PATH, RESULT_FILE_NAME_SUFFIX
+from config import (REPORTS_PATH, 
+                    RESULTS_PATH, 
+                    RESULT_FILE_NAME_SUFFIX,
+)
+
 
 def main():
     verbose = "--verbose" in sys.argv
@@ -23,24 +27,24 @@ def main():
     # get report names
     for report in get_report_names():
 
-        # create data frame
-        df = pd.read_excel(f'{REPORTS_PATH}/{report}')
-
-        # play code
-        #print(df, "\n")
-        #for column_name in df:
-        #    print(df[column_name], "\n")
-
-
-
         # assigns result file name, removes ".xls" suffix with new suffix
         file_name = report.replace(".xls", f" {RESULT_FILE_NAME_SUFFIX}")
         
-        
-        
-        
+        # create data frame
+        df = pd.read_excel(f'{REPORTS_PATH}/{report}')
+
         # TODO
         # perform analysis on dataframe
+
+        # get column titles "RSSI (dBm)"
+        print(df['RSSI (dBm)'], '\n')
+
+        # get column titles "RSRP (dBm)"
+        print(df['RSRP (dBm)'], '\n')
+
+        # get column titles "RSRQ (dB)"
+        print(df['RSRQ (dB)'], '\n')
+
             # apply formula to each row
             # add intermediary results in new columns
             # add final results to end
