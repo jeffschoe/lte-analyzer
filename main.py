@@ -22,8 +22,9 @@ def main():
 
     # get report names
     for report in get_report_names():
+
         # create data frame
-        df = pd.read_excel('reports/Hampton Inn 1.xls')
+        df = pd.read_excel(f'{REPORTS_PATH}/{report}')
 
         # play code
         #print(df, "\n")
