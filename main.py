@@ -25,11 +25,13 @@ def main():
     verbose = "--verbose" in sys.argv
     if not sys.argv[1:]:
         print("Octpopus LTE Signal Meter Report Analyzer")
-        print('\nAnalyzes any reports in the reports/ directory')
+        print('')
+        print('Analyzes any Octopus cellular reports in the reports/ directory')
         print('Usage: python main.py [--verbose]')
-        print('[--verbose] prints results to the console')
+        print('[--verbose] prints results to the console') # currently prints to console no matter what, need to enable flag
         print(f'Results are stored as .xlsx in the results/ directory with the same file name + " {RESULT_FILE_NAME_SUFFIX}" appended')
-        print('Existing files in results/ dir with the same file name will be overwritten\n')
+        print('Existing files in results/ dir with the same file name will be overwritten')
+        print('')
         
     
     # if results dir does not exist, create it
@@ -116,6 +118,8 @@ def get_report_names():
     for item in os.listdir(REPORTS_PATH):
         if item.endswith(".xls"): # only gets excel files
             report_names.append(item)
+            print(f'file: {item}, found and queued')
+        else: print(f'skipping file: {item}, .xls type not detected')
     return report_names
     
     
