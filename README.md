@@ -10,6 +10,6 @@ I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems
 - openpyxl: uv add openpyxl
 
 # usage
-1. add cellular signal reports in the reports/ directory
-2. run program: main.py [--verbose]
-3. view analyzed reports in the results/ directory
+- add cellular signal reports in the reports/ directory
+- run program: python3 main.py [--verbose]
+- view analyzed reports in the results/ directory

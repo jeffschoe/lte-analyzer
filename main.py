@@ -28,7 +28,7 @@ def main():
         print('')
         print('Analyzes any Octopus cellular reports in the reports/ directory')
         print('Usage: python main.py [--verbose]')
-        print('[--verbose] prints results to the console') # currently prints to console no matter what, need to enable flag
+        print('[--verbose] prints results to the console')
         print(f'Results are stored as .xlsx in the results/ directory with the same file name + " {RESULT_FILE_NAME_SUFFIX}" appended')
         print('Existing files in results/ dir with the same file name will be overwritten')
         print('')
@@ -39,7 +39,7 @@ def main():
         os.makedirs(RESULTS_PATH)
 
     # get report names
-    for report in get_report_names():
+    for report in get_report_names(verbose):
 
         # assigns result file name, removes ".xls" suffix with new suffix
         file_name = report.replace(".xls", f" {RESULT_FILE_NAME_SUFFIX}")
@@ -50,19 +50,20 @@ def main():
         # TODO
         # perform analysis on dataframe
 
-        # get column titles "RSSI (dBm)"
-        print(df['RSSI (dBm)'], '\n')
+        if verbose:
+            # get column titles "RSSI (dBm)"
+            print(df['RSSI (dBm)'], '\n')
 
 
-        # get column titles "RSRP (dBm)"
-        print(df['RSRP (dBm)'], '\n')
+            # get column titles "RSRP (dBm)"
+            print(df['RSRP (dBm)'], '\n')
 
-        # get column titles "RSRQ (dB)"
-        print(df['RSRQ (dB)'], '\n')
+            # get column titles "RSRQ (dB)"
+            print(df['RSRQ (dB)'], '\n')
 
-            # apply formula to each row
-            # add intermediary results in new columns
-            # add final results to end
+        # apply formula to each row
+        # add intermediary results in new columns
+        # add final results to end
 
 
 
@@ -112,14 +113,17 @@ def eval_rsrq(rsrq):
         return "Unusable"
 
 
-def get_report_names():
+def get_report_names(verbose):
     report_names = []
     # returns a list of reports names in reports dir
     for item in os.listdir(REPORTS_PATH):
         if item.endswith(".xls"): # only gets excel files
             report_names.append(item)
-            print(f'file: {item}, found and queued')
-        else: print(f'skipping file: {item}, .xls type not detected')
+            if verbose:
+                print(f"file '{item}' found and queued")
+        else: 
+            if verbose:
+                print(f"file '{item}' skipped, .xls type not detected")
     return report_names
     
     
