@@ -78,6 +78,8 @@ def main():
         # saves dataframe to .xlsx in results dir
         df.to_excel(f'{RESULTS_PATH}/{file_name}.xlsx')
 
+    print(f'Success, your reports are now available at {REPORTS_PATH}')
+
             
 
 
