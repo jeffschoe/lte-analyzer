@@ -3,36 +3,39 @@ import os
 import shutil
 import pandas as pd
 
-from config import (REPORTS_PATH, 
-                    RESULTS_PATH, 
-                    RESULT_FILE_NAME_SUFFIX,
-                    RSSI_EXCLNT_GOOD_BOUND,
-                    RSSI_GOOD_FAIR_BOUND,
-                    RSSI_FAIR_POOR_BOUND,
-                    RSSI_POOR_UNUSBL_BOUND,
-                    RSRP_EXCLNT_GOOD_BOUND,
-                    RSRP_GOOD_FAIR_BOUND,
-                    RSRP_FAIR_POOR_BOUND,
-                    RSRP_POOR_UNUSBL_BOUND,
-                    RSRQ_EXCLNT_GOOD_BOUND,
-                    RSRQ_GOOD_FAIR_BOUND,
-                    RSRQ_FAIR_POOR_BOUND,
-                    RSRQ_POOR_UNUSBL_BOUND,
+from config import (
+    REPORTS_PATH, 
+    RESULTS_PATH, 
+    RESULT_FILE_NAME_SUFFIX,
 )
+
+from calcs import eval_rssi, eval_rsrp, eval_rsrq
 
 
 def main():
+    run_command = "run"
     verbose = "--verbose" in sys.argv
-    if not sys.argv[1:]:
-        print("Octpopus LTE Signal Meter Report Analyzer")
-        print('')
+    
+    if not sys.argv[1:]: # if not arguments provided
+        print("🐙Octpopus LTE Signal Meter Report Analyzer")
         print('Analyzes any Octopus cellular reports in the reports/ directory')
-        print('Usage: python main.py [--verbose]')
-        print('[--verbose] prints results to the console')
+        print('')
+        print('Usage: python main.py run [--verbose]')
+        print('[--verbose] prints additional information to the console')
+        print('')
         print(f'Results are stored as .xlsx in the results/ directory with the same file name + " {RESULT_FILE_NAME_SUFFIX}" appended')
         print('Existing files in results/ dir with the same file name will be overwritten')
         print('')
-        
+        print('exiting...')
+        print('')
+        sys.exit(1)
+    if sys.argv[1] != run_command:
+        print(f'unknown command <{sys.argv[1]}>')
+        print("usage: python main.py run [--verbose]")  
+        print('')
+        print('exiting...')
+        print('')
+        sys.exit(1)
     
     # if results dir does not exist, create it
     if not os.path.exists(RESULTS_PATH):
@@ -49,17 +52,21 @@ def main():
 
         # TODO
         # perform analysis on dataframe
+        rssi_dbm_df = df['RSSI (dBm)']
+        rsrp_dbm_df = df['RSRP (dBm)']
+        rsrq_db_df = df['RSRQ (dB)']
+
+        rssi_dbm_df_evaled = rssi_dbm_df.map(eval_rssi)
+        rsrp_dbm_df_evaled = rsrp_dbm_df.map(eval_rssi)
+        rsrq_db_df_evaled = rsrq_db_df.map(eval_rssi)
 
         if verbose:
-            # get column titles "RSSI (dBm)"
-            print(df['RSSI (dBm)'], '\n')
-
-
-            # get column titles "RSRP (dBm)"
-            print(df['RSRP (dBm)'], '\n')
-
-            # get column titles "RSRQ (dB)"
-            print(df['RSRQ (dB)'], '\n')
+            print(rssi_dbm_df, '\n')
+            print(rsrp_dbm_df, '\n')
+            print(rsrq_db_df, '\n')
+            print(rssi_dbm_df_evaled, '\n')
+            print(rsrp_dbm_df_evaled, '\n')
+            print(rsrq_db_df_evaled, '\n')
 
         # apply formula to each row
         # add intermediary results in new columns
@@ -72,45 +79,7 @@ def main():
         df.to_excel(f'{RESULTS_PATH}/{file_name}.xlsx')
 
             
-        
 
-
-def eval_rssi(rssi):
-    if float('inf') > rssi >= RSSI_EXCLNT_GOOD_BOUND:
-        return "Excellent"
-    elif RSSI_EXCLNT_GOOD_BOUND > rssi >= RSSI_GOOD_FAIR_BOUND:
-        return "Good"
-    elif RSSI_GOOD_FAIR_BOUND > rssi >= RSSI_FAIR_POOR_BOUND:
-        return "Fair"
-    elif RSSI_FAIR_POOR_BOUND > rssi >= RSSI_POOR_UNUSBL_BOUND:
-        return "Poor"
-    else: 
-        return "Unusable"
-
-    
-def eval_rsrp(rsrp):
-    if float('inf') > rsrp >= RSRP_EXCLNT_GOOD_BOUND:
-        return "Excellent"
-    elif RSRP_EXCLNT_GOOD_BOUND > rsrp >= RSRP_GOOD_FAIR_BOUND:
-        return "Good"
-    elif RSRP_GOOD_FAIR_BOUND > rsrp >= RSRP_FAIR_POOR_BOUND:
-        return "Fair"
-    elif RSRP_FAIR_POOR_BOUND > rsrp >= RSRP_POOR_UNUSBL_BOUND:
-        return "Poor"
-    else: 
-        return "Unusable"
-
-def eval_rsrq(rsrq):
-    if float('inf') > rsrq >= RSRQ_EXCLNT_GOOD_BOUND:
-        return "Excellent"
-    elif RSRQ_EXCLNT_GOOD_BOUND > rsrq >= RSRQ_GOOD_FAIR_BOUND:
-        return "Good"
-    elif RSRQ_GOOD_FAIR_BOUND > rsrq >= RSRQ_FAIR_POOR_BOUND:
-        return "Fair"
-    elif RSRQ_FAIR_POOR_BOUND > rsrq >= RSRQ_POOR_UNUSBL_BOUND:
-        return "Poor"
-    else: 
-        return "Unusable"
 
 
 def get_report_names(verbose):
