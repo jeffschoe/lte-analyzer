@@ -52,27 +52,28 @@ def main():
 
         # TODO
         # perform analysis on dataframe
-        rssi_dbm_df = df['RSSI (dBm)']
-        rsrp_dbm_df = df['RSRP (dBm)']
-        rsrq_db_df = df['RSRQ (dB)']
+        rssi_dbm_series = df['RSSI (dBm)']
+        rsrp_dbm_series = df['RSRP (dBm)']
+        rsrq_db_series = df['RSRQ (dB)']
 
-        rssi_dbm_df_evaled = rssi_dbm_df.map(eval_rssi)
-        rsrp_dbm_df_evaled = rsrp_dbm_df.map(eval_rssi)
-        rsrq_db_df_evaled = rsrq_db_df.map(eval_rssi)
+        rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi)
+        rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rssi)
+        rsrq_db_series_evaled = rsrq_db_series.map(eval_rssi)
 
+        """
         if verbose:
-            print(rssi_dbm_df, '\n')
-            print(rsrp_dbm_df, '\n')
-            print(rsrq_db_df, '\n')
-            print(rssi_dbm_df_evaled, '\n')
-            print(rsrp_dbm_df_evaled, '\n')
-            print(rsrq_db_df_evaled, '\n')
-
-        # apply formula to each row
-        # add intermediary results in new columns
-        # add final results to end
-
-
+            print(rssi_dbm_series, '\n')
+            print(rsrp_dbm_series, '\n')
+            print(rsrq_db_series, '\n')
+            print(rssi_dbm_series_evaled, '\n')
+            print(rsrp_dbm_series_evaled, '\n')
+            print(rsrq_db_series_evaled, '\n')
+        """
+    
+        # add results columns
+        df['RSSI (dBm) Result'] = rssi_dbm_series_evaled
+        df['RSRP (dBm) Result'] = rsrp_dbm_series_evaled
+        df['RSRQ (dB) Result'] = rsrq_db_series_evaled
 
 
         # saves dataframe to .xlsx in results dir
