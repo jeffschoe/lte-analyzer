@@ -55,8 +55,8 @@ def main():
         rsrp_dbm_series = df['RSRP (dBm)']
         rsrq_db_series = df['RSRQ (dB)']
         rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi)
-        rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rssi)
-        rsrq_db_series_evaled = rsrq_db_series.map(eval_rssi)
+        rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rsrp)
+        rsrq_db_series_evaled = rsrq_db_series.map(eval_rsrq)
     
         # add results columns
         df['RSSI (dBm) Result'] = rssi_dbm_series_evaled
