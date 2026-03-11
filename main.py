@@ -50,41 +50,29 @@ def main():
         # create data frame
         df = pd.read_excel(f'{REPORTS_PATH}/{report}')
 
-        # TODO
         # perform analysis on dataframe
         rssi_dbm_series = df['RSSI (dBm)']
         rsrp_dbm_series = df['RSRP (dBm)']
         rsrq_db_series = df['RSRQ (dB)']
-
         rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi)
         rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rssi)
         rsrq_db_series_evaled = rsrq_db_series.map(eval_rssi)
-
-        """
-        if verbose:
-            print(rssi_dbm_series, '\n')
-            print(rsrp_dbm_series, '\n')
-            print(rsrq_db_series, '\n')
-            print(rssi_dbm_series_evaled, '\n')
-            print(rsrp_dbm_series_evaled, '\n')
-            print(rsrq_db_series_evaled, '\n')
-        """
     
         # add results columns
         df['RSSI (dBm) Result'] = rssi_dbm_series_evaled
         df['RSRP (dBm) Result'] = rsrp_dbm_series_evaled
         df['RSRQ (dB) Result'] = rsrq_db_series_evaled
 
-
         # saves dataframe to .xlsx in results dir
         df.to_excel(f'{RESULTS_PATH}/{file_name}.xlsx')
 
-    print(f'Success, your reports are now available at {REPORTS_PATH}')
+        # view results in the CLI
+        if verbose:
+            print(f'Results for file {file_name}\n{df}')
+
+    print(f'✅ Success, your reports are now available at {REPORTS_PATH}')
 
             
-
-
-
 def get_report_names(verbose):
     report_names = []
     # returns a list of reports names in reports dir
