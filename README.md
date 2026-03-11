@@ -11,5 +11,5 @@ I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems
 
 # usage
 - add cellular signal reports in the reports/ directory
-- run program: python3 main.py [--verbose]
+- run program: python main.py run [--verbose]
 - view analyzed reports in the results/ directory
