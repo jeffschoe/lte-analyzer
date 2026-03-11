@@ -70,7 +70,7 @@ def main():
         if verbose:
             print(f'Results for file {file_name}\n{df}')
 
-    print(f'✅ Success, your reports are now available at {REPORTS_PATH}')
+    print(f'✅ Success, your results are now available at {RESULTS_PATH}')
 
             
 def get_report_names(verbose):
