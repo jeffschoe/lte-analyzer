@@ -9,6 +9,7 @@ wheels/
 # Virtual environments
 .venv
 
-# Folders
-reports/
+# Folders and Files
 results/
+sample_data/
+TODO.md
