@@ -1,4 +1,6 @@
-# Activating the virtual environment
+# Notes
+
+## Activating the virtual environment
 ```bash
 source .venv/bin/activate
 ```
