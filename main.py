@@ -11,20 +11,7 @@ from config import (
 
 from calcs import eval_rssi, eval_rsrp, eval_rsrq
 
-from config import (
-    RSSI_EXCLNT_GOOD_BOUND,
-    RSSI_GOOD_FAIR_BOUND,
-    RSSI_FAIR_POOR_BOUND,
-    RSSI_POOR_UNUSBL_BOUND,
-    RSRP_EXCLNT_GOOD_BOUND,
-    RSRP_GOOD_FAIR_BOUND,
-    RSRP_FAIR_POOR_BOUND,
-    RSRP_POOR_UNUSBL_BOUND,
-    RSRQ_EXCLNT_GOOD_BOUND,
-    RSRQ_GOOD_FAIR_BOUND,
-    RSRQ_FAIR_POOR_BOUND,
-    RSRQ_POOR_UNUSBL_BOUND,
-)     
+from config import bounds     
 
 
 def main():
@@ -165,21 +152,9 @@ def unknown_command(cmd):
 
 def show_thresholds():
     print('')
-    print(f'RSSI_POOR_UNUSBL_BOUND = {RSSI_EXCLNT_GOOD_BOUND} dBm')
-    print(f'RSSI_GOOD_FAIR_BOUND   = {RSSI_GOOD_FAIR_BOUND} dBm')
-    print(f'RSSI_FAIR_POOR_BOUND   = {RSSI_FAIR_POOR_BOUND} dBm')
-    print(f'RSSI_POOR_UNUSBL_BOUND = {RSSI_POOR_UNUSBL_BOUND} dBm')
-    print('')
-    print(f'RSRP_EXCLNT_GOOD_BOUND = {RSRP_EXCLNT_GOOD_BOUND} dBm')
-    print(f'RSRP_GOOD_FAIR_BOUND   = {RSRP_GOOD_FAIR_BOUND} dBm')
-    print(f'RSRP_FAIR_POOR_BOUND   = {RSRP_FAIR_POOR_BOUND} dBm')
-    print(f'RSRP_POOR_UNUSBL_BOUND = {RSRP_POOR_UNUSBL_BOUND} dBm')
-    print('')
-    print(f'RSRQ_EXCLNT_GOOD_BOUND = {RSRQ_EXCLNT_GOOD_BOUND} dB')
-    print(f'RSRQ_GOOD_FAIR_BOUND   = {RSRQ_GOOD_FAIR_BOUND} dB')
-    print(f'RSRQ_FAIR_POOR_BOUND   = {RSRQ_FAIR_POOR_BOUND} dB')
-    print(f'RSRQ_POOR_UNUSBL_BOUND = {RSRQ_POOR_UNUSBL_BOUND} dB')
-    # NOTE: may consider storing bounds as dictionary for easier access to vars and names, allows for more customization
+    for key, (val, unit, *_) in bounds.items(): # `*_` ignores the rest of the tuple params in unpacking
+        print(f'{key} = {val} {unit}')
+
 
 def adjust_thresholds():
     # Allows user to adjust the threshold values"
