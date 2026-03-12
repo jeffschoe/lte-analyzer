@@ -140,6 +140,7 @@ def show_help(cmd_registry):
 
 
 def unknown_command(cmd):
+        print('')
         print(f'unknown command <{cmd}>')
 
 
