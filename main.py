@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 import pandas as pd
 
 from config import (
@@ -9,9 +10,6 @@ from config import (
 )
 
 from calcs import eval_rssi, eval_rsrp, eval_rsrq
-
-        
-
 
 
 def main():
@@ -24,6 +22,7 @@ def main():
         "exit": (exit_program, "Exits the analyzer"),
         "help": (show_help, "Prints list of possible commands"),
         "run": (run_analyzer, "Runs the analyzer"),
+        "clear": (clear_results_dir, "Clears (deletes) all contents of the results directory")
     }
 
     verbose = "--verbose" in sys.argv
@@ -32,6 +31,7 @@ def main():
     repl = True
 
     while (repl):
+        print('')
         arg = input('Enter command > ').strip().lower() # get user command
         cmd = cmd_registry.get(arg) # return tuples of (funcs, descps)
         
@@ -45,8 +45,7 @@ def main():
         
         else:
             unknown_command(arg)
-
-            
+         
 
 def run_analyzer(verbose):
     # get report names
@@ -81,7 +80,6 @@ def run_analyzer(verbose):
 
         print('')
         print(f'✅ Success, your results are now available at {RESULTS_PATH}')
-        print('')
 
 
 def get_report_names(verbose):
@@ -103,6 +101,19 @@ def create_results_dir():
         os.makedirs(RESULTS_PATH)
 
 
+def clear_results_dir():
+    for filename in os.listdir(RESULTS_PATH):
+        file_path = os.path.join(RESULTS_PATH, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
+    print("Results folder cleared.")
+
+
 def print_start_message():
     print("🐙Octpopus LTE Signal Meter Report Analyzer")
     print('Analyzes any Octopus cellular reports in the reports/ directory')
@@ -114,7 +125,6 @@ def print_start_message():
     print('')
     print(f'Results are stored as .xlsx in the results/ directory with the same file name + " {RESULT_FILE_NAME_SUFFIX}" appended')
     print('Existing files in results/ dir with the same file name will be overwritten')
-    print('')
 
 
 def exit_program():
@@ -123,10 +133,10 @@ def exit_program():
 
 
 def show_help(cmd_registry):
+    print('')
     print('Possible commands:')
     for cmd, (_, desc) in cmd_registry.items():
         print(f'    {cmd} : {desc}')
-    print('')
 
 
 def unknown_command(cmd):
