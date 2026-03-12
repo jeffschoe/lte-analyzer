@@ -154,7 +154,7 @@ def exit_program():
 def show_help(cmd_registry):
     print('')
     print('Possible commands:')
-    for cmd, (_, desc) in cmd_registry.items():
+    for cmd, (_, desc) in cmd_registry.items(): # unpacking, ignores function in tuple
         print(f'    {cmd} : {desc}')
 
 
