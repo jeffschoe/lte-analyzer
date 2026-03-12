@@ -76,15 +76,15 @@ def run_analyzer(verbose):
             df = pd.read_excel(f'{REPORTS_PATH}/{report}')
 
             # perform analysis on dataframe
-            rssi_dbm_series = df['RSSI (dBm)']
+            rssi_dbm_series = df['RSSI (dBm)'] # get the data from the original report column (series)
             rsrp_dbm_series = df['RSRP (dBm)']
             rsrq_db_series = df['RSRQ (dB)']
-            rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi)
+            rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi) # example 'GOOD', 'POOR'
             rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rsrp)
             rsrq_db_series_evaled = rsrq_db_series.map(eval_rsrq)
         
             # add results columns
-            df['RSSI (dBm) Result'] = rssi_dbm_series_evaled
+            df['RSSI (dBm) Result'] = rssi_dbm_series_evaled # example 'GOOD', 'POOR'
             df['RSRP (dBm) Result'] = rsrp_dbm_series_evaled
             df['RSRQ (dB) Result'] = rsrq_db_series_evaled
 
@@ -176,7 +176,7 @@ def show_thresholds():
     print(f'RSRP_POOR_UNUSBL_BOUND = {RSRP_POOR_UNUSBL_BOUND} dBm')
     print('')
     print(f'RSRQ_EXCLNT_GOOD_BOUND = {RSRQ_EXCLNT_GOOD_BOUND} dB')
-    print(f'RSRQ_GOOD_FAIR_BOUND   = {RSRQ_EXCLNT_GOOD_BOUND} dB')
+    print(f'RSRQ_GOOD_FAIR_BOUND   = {RSRQ_GOOD_FAIR_BOUND} dB')
     print(f'RSRQ_FAIR_POOR_BOUND   = {RSRQ_FAIR_POOR_BOUND} dB')
     print(f'RSRQ_POOR_UNUSBL_BOUND = {RSRQ_POOR_UNUSBL_BOUND} dB')
     # NOTE: may consider storing bounds as dictionary for easier access to vars and names, allows for more customization
