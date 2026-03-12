@@ -146,6 +146,7 @@ def print_start_message():
 
 
 def exit_program():
+    print('')
     print('exiting...')
     sys.exit(1)
 
