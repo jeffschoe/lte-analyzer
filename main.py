@@ -70,7 +70,7 @@ def run_analyzer(verbose):
         for report in get_report_names(verbose):
 
             # assigns result file name, removes ".xls" suffix with new suffix
-            file_name = report.replace(".xls", f" {RESULT_FILE_NAME_SUFFIX}")
+            file_name = report.replace(".xls", f"{RESULT_FILE_NAME_SUFFIX}")
             
             # create data frame
             df = pd.read_excel(f'{REPORTS_PATH}/{report}')

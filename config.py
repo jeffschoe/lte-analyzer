@@ -1,7 +1,7 @@
 # File Creation
 REPORTS_PATH = "./reports"
 RESULTS_PATH = "./results"
-RESULT_FILE_NAME_SUFFIX = "RESULT"
+RESULT_FILE_NAME_SUFFIX = "_RESULT"
 
 # Thresholds for report evaluation
 RSSI_EXCLNT_GOOD_BOUND = -59
