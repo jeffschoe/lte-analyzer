@@ -150,18 +150,14 @@ def unknown_command(cmd):
         print('')
         print(f'unknown command <{cmd}>')
 
-#range name/key: (signal type, upper bound, lower bound, unit, ranking, result description)
-def show_bounds_old():
-    print('')
-    for key, (val, unit, *_) in bounds.items(): # `*_` ignores the rest of the tuple params in unpacking
-        print(f'{key} = {val} {unit}')
 
 #range name/key: (signal type, upper bound, lower bound, unit, ranking, result description)
 # "rssi_excellent_range": (rssi_type, rssi_max_bound, rssi_excellent_good_bound, RSSI_UNIT, 0, EXCELLENT_RESULT),
 def show_bounds():
     print('')
-    for _, (signal_type, upper_bound, lower_bound, unit, _, result_desc) in signal_ranges.items(): # `*_` ignores the rest of the tuple params in unpacking
+    for _, (signal_type, upper_bound, lower_bound, unit, _, result_desc) in signal_ranges.items(): # `_` ignores arg/param in unpacking
         print(f'{signal_type} {result_desc}: {upper_bound} {unit} to {lower_bound} {unit}')
+
 
 def adjust_bounds():
     # Allows user to adjust the threshold values"
