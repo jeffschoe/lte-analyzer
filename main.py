@@ -11,7 +11,7 @@ from config import (
 
 from calcs import eval_rssi, eval_rsrp, eval_rsrq
 
-from config import bounds     
+from config import signal_ranges
 
 
 def main():
@@ -25,9 +25,9 @@ def main():
         "help": (show_help, "Prints list of possible commands"),
         "run": (run_analyzer, "Runs the analyzer"),
         "clear": (clear_results_dir, "Clears (deletes) all contents of the results directory"),
-        "showthresh" : (show_thresholds, "Displays the current theshold valaues"),
-        "adjthresh" : (adjust_thresholds, "Allows user to adjust the threshold values"),
-        "rstthresh" : (reset_thresholds, "Resets threshold values to defaults"),
+        "showbound" : (show_bounds, "Displays the current signal boundary valaues"),
+        "adjbound" : (adjust_bounds, "Allows user to adjust the signal boundar values"),
+        "rstbound" : (reset_bounds, "Resets signal boundary values to defaults"),
     }
 
     verbose = "--verbose" in sys.argv
@@ -120,6 +120,7 @@ def clear_results_dir():
 
 
 def print_start_message():
+    print('')
     print("🐙Octpopus LTE Signal Meter Report Analyzer")
     print('Analyzes any Octopus cellular reports in the reports/ directory')
     print('')
@@ -149,19 +150,25 @@ def unknown_command(cmd):
         print('')
         print(f'unknown command <{cmd}>')
 
-
-def show_thresholds():
+#range name/key: (signal type, upper bound, lower bound, unit, ranking, result description)
+def show_bounds_old():
     print('')
     for key, (val, unit, *_) in bounds.items(): # `*_` ignores the rest of the tuple params in unpacking
         print(f'{key} = {val} {unit}')
 
+#range name/key: (signal type, upper bound, lower bound, unit, ranking, result description)
+# "rssi_excellent_range": (rssi_type, rssi_max_bound, rssi_excellent_good_bound, RSSI_UNIT, 0, EXCELLENT_RESULT),
+def show_bounds():
+    print('')
+    for _, (signal_type, upper_bound, lower_bound, unit, _, result_desc) in signal_ranges.items(): # `*_` ignores the rest of the tuple params in unpacking
+        print(f'{signal_type} {result_desc}: {upper_bound} {unit} to {lower_bound} {unit}')
 
-def adjust_thresholds():
+def adjust_bounds():
     # Allows user to adjust the threshold values"
     pass
     
 
-def reset_thresholds():
+def reset_bounds():
     # Resets threshold values to defaults
     pass
 

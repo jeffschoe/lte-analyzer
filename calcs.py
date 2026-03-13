@@ -1,78 +1,60 @@
-import logging
-
-from config import (
-    bounds
-)     
-
-'''
-def eval_rssi_old(rssi): # arg comes from excel table (cell of the series)
-    if rssi >= RSSI_EXCLNT_GOOD_BOUND:
-        return "Excellent"
-    elif rssi >= RSSI_GOOD_FAIR_BOUND:
-        return "Good"
-    elif rssi >= RSSI_FAIR_POOR_BOUND:
-        return "Fair"
-    elif rssi >= RSSI_POOR_UNUSBL_BOUND:
-        return "Poor"
-    elif rssi > float('-inf'):
-        return "Unusable"
-    else:
-        return "ERROR"
-'''
+from config import signal_ranges
     
+
+
+#range name/key: (signal type, upper bound, lower bound, unit, ranking, result description)
+#"rssi_excellent_range": (rssi_type, rssi_max_bound, rssi_excellent_good_bound, RSSI_UNIT, 0, EXCELLENT_RESULT),
 def eval_rssi(rssi): # arg comes from excel table (cell of the series)
-    if rssi >= bounds["RSSI_EXCLNT_GOOD_BOUND"][0]:
-        return bounds["RSSI_EXCLNT_GOOD_BOUND"][3]
+    if signal_ranges["rssi_excellent_range"][1] > rssi >= signal_ranges["rssi_excellent_range"][2]:
+        return signal_ranges["rssi_excellent_range"][5]
     
-    elif rssi >= bounds["RSSI_GOOD_FAIR_BOUND"][0]:
-        return bounds["RSSI_GOOD_FAIR_BOUND"][3]
+    elif signal_ranges["rssi_good_range"][1] > rssi >= signal_ranges["rssi_good_range"][2]:
+        return signal_ranges["rssi_good_range"][5]
     
-    elif rssi >= bounds["RSSI_FAIR_POOR_BOUND"][0]:
-        return bounds["RSSI_FAIR_POOR_BOUND"][3]
+    elif signal_ranges["rssi_fair_range"][1] > rssi >= signal_ranges["rssi_fair_range"][2]:
+        return signal_ranges["rssi_fair_range"][5]
     
-    elif rssi >= bounds["RSSI_POOR_UNUSBL_BOUND"][0]:
-        return bounds["RSSI_POOR_UNUSBL_BOUND"][3]
+    elif signal_ranges["rssi_poor_range"][1] > rssi >= signal_ranges["rssi_poor_range"][2]:
+        return signal_ranges["rssi_poor_range"][5]
     
-    elif rssi > float('-inf'):
-        return bounds["RSSI_POOR_UNUSBL_BOUND"][4]
+    elif signal_ranges["rssi_unusable_range"][1] > rssi >= signal_ranges["rssi_unusable_range"][2]:
+        return signal_ranges["rssi_unusable_range"][5]
     else:
         return "ERROR"
-
-def eval_rsrp(rsrp):
-    if rsrp >= bounds["RSRP_EXCLNT_GOOD_BOUND"][0]:
-        return bounds["RSRP_EXCLNT_GOOD_BOUND"][3]
     
-    elif rsrp >= bounds["RSRP_GOOD_FAIR_BOUND"][0]:
-        return bounds["RSRP_GOOD_FAIR_BOUND"][3]
+def eval_rsrp(rsrp): # arg comes from excel table (cell of the series)
+    if signal_ranges["rsrp_excellent_range"][1] > rsrp >= signal_ranges["rsrp_excellent_range"][2]:
+        return signal_ranges["rsrp_excellent_range"][5]
     
-    elif rsrp >= bounds["RSRP_FAIR_POOR_BOUND"][0]:
-        return bounds["RSRP_FAIR_POOR_BOUND"][3]
+    elif signal_ranges["rsrp_good_range"][1] > rsrp >= signal_ranges["rsrp_good_range"][2]:
+        return signal_ranges["rsrp_good_range"][5]
     
-    elif rsrp >= bounds["RSRP_POOR_UNUSBL_BOUND"][0]:
-        return bounds["RSRP_POOR_UNUSBL_BOUND"][3]
+    elif signal_ranges["rsrp_fair_range"][1] > rsrp >= signal_ranges["rsrp_fair_range"][2]:
+        return signal_ranges["rsrp_fair_range"][5]
     
-    elif rsrp > float('-inf'):
-        return bounds["RSRP_POOR_UNUSBL_BOUND"][4]
+    elif signal_ranges["rsrp_poor_range"][1] > rsrp >= signal_ranges["rsrp_poor_range"][2]:
+        return signal_ranges["rsrp_poor_range"][5]
     
+    elif signal_ranges["rsrp_unusable_range"][1] > rsrp >= signal_ranges["rsrp_unusable_range"][2]:
+        return signal_ranges["rsrp_unusable_range"][5]
     else:
         return "ERROR"
-
-def eval_rsrq(rsrq):
-    if rsrq >= bounds["RSRQ_EXCLNT_GOOD_BOUND"][0]:
-        return bounds["RSRQ_EXCLNT_GOOD_BOUND"][3]
     
-    elif rsrq >= bounds["RSRQ_GOOD_FAIR_BOUND"][0]:
-        return bounds["RSRQ_GOOD_FAIR_BOUND"][3]
+def eval_rsrq(rsrq): # arg comes from excel table (cell of the series)
+    if signal_ranges["rsrq_excellent_range"][1] > rsrq >= signal_ranges["rsrq_excellent_range"][2]:
+        return signal_ranges["rsrq_excellent_range"][5]
     
-    elif rsrq >= bounds["RSRQ_FAIR_POOR_BOUND"][0]:
-        return bounds["RSRQ_FAIR_POOR_BOUND"][3]
+    elif signal_ranges["rsrq_good_range"][1] > rsrq >= signal_ranges["rsrq_good_range"][2]:
+        return signal_ranges["rsrq_good_range"][5]
     
-    elif rsrq >= bounds["RSRQ_POOR_UNUSBL_BOUND"][0]:
-        return bounds["RSRQ_POOR_UNUSBL_BOUND"][3]
+    elif signal_ranges["rsrq_fair_range"][1] > rsrq >= signal_ranges["rsrq_fair_range"][2]:
+        return signal_ranges["rsrq_fair_range"][5]
     
-    elif rsrq > float('-inf'):
-        return bounds["RSRQ_POOR_UNUSBL_BOUND"][4]
+    elif signal_ranges["rsrq_poor_range"][1] > rsrq >= signal_ranges["rsrq_poor_range"][2]:
+        return signal_ranges["rsrq_poor_range"][5]
     
+    elif signal_ranges["rsrq_unusable_range"][1] > rsrq >= signal_ranges["rsrq_unusable_range"][2]:
+        return signal_ranges["rsrq_unusable_range"][5]
     else:
         return "ERROR"
     
