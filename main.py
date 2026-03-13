@@ -9,7 +9,7 @@ from config import (
     RESULT_FILE_NAME_SUFFIX,
 )
 
-from calcs import eval_rssi, eval_rsrp, eval_rsrq
+from calcs import eval_rssi, eval_rsrp, eval_rsrq, get_rank, get_recommendation
 
 from config import signal_ranges
 
@@ -66,14 +66,21 @@ def run_analyzer(verbose):
             rssi_dbm_series = df['RSSI (dBm)'] # get the data from the original report column (series)
             rsrp_dbm_series = df['RSRP (dBm)']
             rsrq_db_series = df['RSRQ (dB)']
+
             rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi) # example 'GOOD', 'POOR'
             rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rsrp)
             rsrq_db_series_evaled = rsrq_db_series.map(eval_rsrq)
-        
+
+            #rssi_evaled_rank_series = rssi_dbm_series_evaled.map(get_rank) this is not needed for current implementation
+            rsrp_evaled_rank_series = rsrp_dbm_series_evaled.map(get_rank)
+            rsrq_evaled_rank_series = rsrq_db_series_evaled.map(get_rank)
+            final_result_series = rsrp_evaled_rank_series.combine(rsrq_evaled_rank_series, get_recommendation) # `.combine` allows pairwise operations on two series
+
             # add results columns
             df['RSSI (dBm) Result'] = rssi_dbm_series_evaled # example 'GOOD', 'POOR'
             df['RSRP (dBm) Result'] = rsrp_dbm_series_evaled
             df['RSRQ (dB) Result'] = rsrq_db_series_evaled
+            df['FINAL RESULT'] = final_result_series
 
             # saves dataframe to .xlsx in results dir
             df.to_excel(f'{RESULTS_PATH}/{file_name}.xlsx')

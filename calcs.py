@@ -1,4 +1,14 @@
-from config import signal_ranges
+import pandas as pd
+from pandas import Series
+
+from config import (
+    signal_ranges, 
+    EXCELLENT_RESULT, 
+    GOOD_RESULT, 
+    FAIR_RESULT, 
+    POOR_RESULT, 
+    UNUSABLE_RESULT
+)
     
 
 
@@ -58,7 +68,45 @@ def eval_rsrq(rsrq): # arg comes from excel table (cell of the series)
     else:
         return "ERROR"
     
+def get_rank(result):
+    if result == EXCELLENT_RESULT:
+        return 0
+    elif result == GOOD_RESULT:
+        return 1
+    elif result == FAIR_RESULT:
+        return 2
+    elif result == POOR_RESULT:
+        return 3
+    else: # result == UNUSABLE_RESULT
+        return 4
 
-def eval_final_recommendation():
+def get_recommendation(rsrp_evaled_rank_element, rsrq_evaled_rank_element):    
     
-    return
+    max_rank = max(rsrp_evaled_rank_element, rsrq_evaled_rank_element)
+
+    if max_rank == 0:
+        return EXCELLENT_RESULT
+    elif max_rank == 1:
+        return GOOD_RESULT
+    elif max_rank == 2:
+        return FAIR_RESULT
+    elif max_rank == 3:
+        return POOR_RESULT
+    else: # max == 4
+        return UNUSABLE_RESULT
+    
+    
+'''def get_rec_helper(rsrp_evaled_rank_cell, rsrq_evaled_rank_cell):
+
+    max_rank = max(rsrp_evaled_rank_cell, rsrq_evaled_rank_cell)
+
+    if max_rank == 0:
+        return EXCELLENT_RESULT
+    elif max_rank == 1:
+        return GOOD_RESULT
+    elif max_rank == 2:
+        return FAIR_RESULT
+    elif max_rank == 3:
+        return POOR_RESULT
+    else: # max == 4
+        return UNUSABLE_RESULT'''
