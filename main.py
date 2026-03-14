@@ -131,7 +131,7 @@ def clear_results_dir():
 
 def print_start_message():
     print('')
-    print("🐙Octpopus LTE Signal Meter Report Analyzer")
+    print("🐙 Octpopus LTE Signal Meter Report Analyzer")
     print('Analyzes any Octopus cellular reports in the reports/ directory')
     print('')
     print('Usage: python main.py [--verbose]')
