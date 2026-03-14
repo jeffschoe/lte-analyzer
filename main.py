@@ -9,7 +9,13 @@ from config import (
     RESULT_FILE_NAME_SUFFIX,
 )
 
-from calcs import eval_rssi, eval_rsrp, eval_rsrq, get_rank, get_recommendation
+from calcs import (
+    eval_rssi, 
+    eval_rsrp, 
+    eval_rsrq, 
+    get_rank, 
+    get_recommendation
+)
 
 from config import signal_ranges
 
@@ -26,9 +32,9 @@ def main():
         "run": (run_analyzer, "Runs the analyzer"),
         "run --verbose": (run_analyzer, "Runs the analyzer and outputs adtl info and results to the console"),
         "clear": (clear_results_dir, "Clears (deletes) all contents of the results directory"),
-        "showbnd" : (show_bounds, "Displays the current signal boundary valaues"),
-        "adjbnd" : (adjust_bounds, "Allows user to adjust the signal boundar values"),
-        "rstbnd" : (reset_bounds, "Resets signal boundary values to defaults"),
+        "bnd" : (show_bounds, "Displays the current signal boundary valaues"),
+        "bnd -a" : (adjust_bounds, "⚠️  CMD NOT AVAILABLE YET - Allows user to adjust the signal boundar values"),
+        "bnd -r" : (reset_bounds, "⚠️  CMD NOT AVAILABLE YET - Resets signal boundary values to defaults"),
         "info" : (show_info, "Displays some additional information and resources on the subject of cellular signal analysis")
     }
 
@@ -164,13 +170,13 @@ def show_bounds():
 
 
 def adjust_bounds():
-    # Allows user to adjust the threshold values"
-    return
+    print('')
+    print('⚠️  Function under construction')
     
 
 def reset_bounds():
-    # Resets threshold values to defaults
-    return
+    print('')
+    print('⚠️  Function under construction')
 
 
 def show_info():
