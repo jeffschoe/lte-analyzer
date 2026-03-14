@@ -174,6 +174,7 @@ def reset_bounds():
 
 
 def show_info():
+    print('')
     print('- RSSI: Received Signal Strength Indicator - Measures overall signal strength, including noise and interference. Higher values indicate stronger reception. This metric alone if not a great indicator of LTE quality.')
     print('- RSRP: Reference Signal Received Power - Measures the strength of the LTE reference signal from the tower. Higher values are better. This, in conjuction with RSRQ, are a good indicator of LTE quality.')
     print('- RSRQ: Reference Signal Received Quality - Measures LTE signal quality and network congestion. Higher values are better. This, in conjuction with RSRP, are a good indicator of LTE quality.')
