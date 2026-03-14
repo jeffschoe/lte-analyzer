@@ -11,7 +11,6 @@ from config import (
 )
     
 
-
 #range name/key: (signal type, upper bound, lower bound, unit, ranking, result description)
 #"rssi_excellent_range": (rssi_type, rssi_max_bound, rssi_excellent_good_bound, RSSI_UNIT, 0, EXCELLENT_RESULT),
 def eval_rssi(rssi): # arg comes from excel table (cell of the series)
@@ -94,19 +93,3 @@ def get_recommendation(rsrp_evaled_rank_element, rsrq_evaled_rank_element):
         return POOR_RESULT
     else: # max == 4
         return UNUSABLE_RESULT
-    
-    
-'''def get_rec_helper(rsrp_evaled_rank_cell, rsrq_evaled_rank_cell):
-
-    max_rank = max(rsrp_evaled_rank_cell, rsrq_evaled_rank_cell)
-
-    if max_rank == 0:
-        return EXCELLENT_RESULT
-    elif max_rank == 1:
-        return GOOD_RESULT
-    elif max_rank == 2:
-        return FAIR_RESULT
-    elif max_rank == 3:
-        return POOR_RESULT
-    else: # max == 4
-        return UNUSABLE_RESULT'''
