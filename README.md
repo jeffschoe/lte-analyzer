@@ -2,7 +2,7 @@
 CLI based tool for accepting .xls signal meter reports and giving an analysis/recommendation based on the data.
 
 ## Motivation
-I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems.com/product/octopus-4g-lte-signal-meter/) to perform cellular signal scans. These scans produce a basic report of various cellular network characteristics in an .xls format. A manual analysis of these values must be performed, usually consisting of applying formulas in Excel. My aim with this program is to apply my analysis parameters to the reports and have pass/fail result automatically generated for me.  
+I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems.com/product/octopus-4g-lte-signal-meter/) to perform cellular signal scans. These scans produce a basic report of various cellular network characteristics in an .xls format. A manual analysis of these values must be performed, usually consisting of applying formulas in Excel. My aim with this program is to apply my analysis parameters to the reports and have overall signal quality results automatically generated for me.  
 
 ## Requirements 
 - Python 3.12 or higher
