@@ -132,15 +132,13 @@ def clear_results_dir():
 def print_start_message():
     print('')
     print("🐙 Octpopus LTE Signal Meter Report Analyzer")
-    print('Analyzes any Octopus cellular reports in the reports/ directory')
+    print('This tool analyzes any Octopus cellular reports in the reports/ directory')
     print('')
-    print('Usage: python main.py [--verbose]')
-    print('[--verbose] prints additional information to the console')
+    print(f'Results are stored as .xlsx in the results/ directory with the same file name + "{RESULT_FILE_NAME_SUFFIX}" appended')
+    print('Be aware, any existing files in results/ dir with the same file name will be overwritten')
     print('')
-    print('Once program has, use command <help> for list of additional commands')
-    print('')
-    print(f'Results are stored as .xlsx in the results/ directory with the same file name + " {RESULT_FILE_NAME_SUFFIX}" appended')
-    print('Existing files in results/ dir with the same file name will be overwritten')
+    print('Use command <run> to start the analyzer.')
+    print('Use command <help> for list of additional commands')
 
 
 def exit_program():

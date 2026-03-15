@@ -41,7 +41,7 @@ python main.py
 
 ## Usage Notes
 - Add new cellular signal reports in `reports/` before running. 
-- Users without reports can copy sample reports from 'reports_sample/': 
+- Users without reports can copy sample reports from `reports_sample/`: 
   ```sh 
   cp -r ./reports_sample/* ./reports/
   ```
