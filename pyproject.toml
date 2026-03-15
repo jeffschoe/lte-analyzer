@@ -1,5 +1,5 @@
 [project]
-name = "octopus-lte-signal-meter-report-analyzer"
+name = "lte-analyzer"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

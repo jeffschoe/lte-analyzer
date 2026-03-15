@@ -1,4 +1,4 @@
-# octopus-lte-signal-meter-report-analyzer
+# lte-analyzer
 CLI based tool for accepting .xls signal meter reports and giving an analysis/recommendation based on the data.
 
 ## Motivation
