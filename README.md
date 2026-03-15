@@ -18,8 +18,8 @@ Sync dependencies and run:
 uv sync 
 uv run main.py
 ```
-uv sync reads your pyproject.toml and installs all dependencies automatically into a local .venv.
-uv run executes your script inside that environment without needing to manually activate it
+- `uv sync` reads your pyproject.toml and installs all dependencies automatically into a local .venv.
+- `uv run main.py` executes your script inside that environment without needing to manually activate it
 
 ### Option 2: Using pip
 
