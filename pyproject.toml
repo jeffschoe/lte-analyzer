@@ -1,7 +1,7 @@
 [project]
 name = "lte-analyzer"
 version = "0.1.0"
-description = "Add your description here"
+description = "A tool for analyzing LTE Signal Scans"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
