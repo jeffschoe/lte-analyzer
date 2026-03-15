@@ -51,8 +51,10 @@ python main.py
 - View results in `results/`.
 
 ## Future Project Extension
-- allow user to define custom parameters from the repl
+- refactor to NOT be REPL as I'm not sure this style adds any value
+- use the argparse library for better argument integration
+- allow user to define custom analysis parameters from the repl
 - graphical output of results
-- gui
+- implement a GUI
 
 
