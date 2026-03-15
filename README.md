@@ -46,7 +46,8 @@ python main.py
   cp -r ./reports_sample/* ./reports/
   ```
 - Start program as described above, which opens a REPL.
-- In the REPL, run `help` to see all available commands.
+- Use command `run` to start the analyzer.
+- Use command `help` to see all available commands.
 - View results in `results/`.
 
 ## Future Project Extension
