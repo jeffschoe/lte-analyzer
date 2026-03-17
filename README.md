@@ -19,13 +19,13 @@ I'm an engineer who utilizes a device called the 🐙 [Octopus](https://www.bvsy
 Install uv if you don't have it:
 https://docs.astral.sh/uv/getting-started/installation/
 
-Sync dependencies:
+#### Sync dependencies:
 ```sh
 uv sync 
 ```
 - This reads your `pyproject.toml` and installs all dependencies automatically into a local `.venv`.
 
-Populate reports:
+#### Populate reports:
 - Add reports to the `reports/` directory.
 - Users without reports can copy sample reports from `reports_sample/`: 
   ```sh 
@@ -33,7 +33,7 @@ Populate reports:
   ```
 Running the project without populating any reports will not cause any harm. User will be prompted with a warning in such cases.
 
-Run the project:
+#### Run the project:
 ```sh
 uv run main.py
 ```
@@ -47,12 +47,12 @@ python -m venv .venv
 source .venv/bin/activate # On Windows: .venv\Scripts\activate
 ```
 
-Install dependencies:
+#### Install dependencies:
 ```sh
 pip install openpyxl pandas
 ```
 
-Populate reports:
+#### Populate reports:
 - Add reports to the `reports/` directory.
 - Users without reports can copy sample reports from `reports_sample/`: 
   ```sh 
@@ -60,7 +60,7 @@ Populate reports:
   ```
 Running the project without populating any reports will not cause any harm. User will be prompted with a warning in such cases.
 
-Run the project:
+#### Run the project:
 ```sh
 python main.py
 ```
@@ -77,7 +77,7 @@ python main.py
 
 ---
 
-## 🌱 Future Project Extension
+## 🌱 Future Project Extensions and Ideas
 - refactor to NOT be REPL as I'm not sure this style adds any value
 - use the argparse library for better argument integration
 - allow user to define custom analysis parameters from the repl
