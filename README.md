@@ -68,7 +68,7 @@ python main.py
 ---
 
 ## ✏️ Usage Notes
-- It is recommended to add new cellular signal reports in `reports/` before running. See above 'Populate Reports' sections above for me information.
+- It is recommended to add new cellular signal reports in `reports/` before running. See above 'Populate Reports' sections for more information.
 - Run program as described above, which opens a REPL.
 - Once inside the REPL
     - Use command `run` to start the analyzer.
