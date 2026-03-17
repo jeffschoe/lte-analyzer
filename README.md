@@ -13,13 +13,25 @@ I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems
 Install uv if you don't have it:
 https://docs.astral.sh/uv/getting-started/installation/
 
-Sync dependencies and run:
+Sync dependencies:
 ```sh
 uv sync 
+```
+- This reads your `pyproject.toml` and installs all dependencies automatically into a local `.venv`.
+
+Populate reports:
+- Add reports to the `reports/` directory.
+- Users without reports can copy sample reports from `reports_sample/`: 
+  ```sh 
+  cp -r ./reports_sample/* ./reports/
+  ```
+Running the project without populating any reports will not cause any harm. User will be prompted with a warning in such cases.
+
+Run the project:
+```sh
 uv run main.py
 ```
-- `uv sync` reads your `pyproject.toml` and installs all dependencies automatically into a local `.venv`.
-- `uv run main.py` executes your script inside that environment without needing to manually activate it
+- This executes your script inside that environment without needing to manually activate it.
 
 ### Option 2: Using pip
 
@@ -34,21 +46,26 @@ Install dependencies:
 pip install openpyxl pandas
 ```
 
+Populate reports:
+- Add reports to the `reports/` directory.
+- Users without reports can copy sample reports from `reports_sample/`: 
+  ```sh 
+  cp -r ./reports_sample/* ./reports/
+  ```
+Running the project without populating any reports will not cause any harm. User will be prompted with a warning in such cases.
+
 Run the project:
 ```sh
 python main.py
 ```
 
 ## Usage Notes
-- Add new cellular signal reports in `reports/` before running. 
-- Users without reports can copy sample reports from `reports_sample/`: 
-  ```sh 
-  cp -r ./reports_sample/* ./reports/
-  ```
-- Start program as described above, which opens a REPL.
-- Use command `run` to start the analyzer.
-- Use command `help` to see all available commands.
-- View results in `results/`.
+- It is recommended to add new cellular signal reports in `reports/` before running. See above 'Populate Reports' sections above for me information.
+- Run program as described above, which opens a REPL.
+- Once inside the REPL
+    - Use command `run` to start the analyzer.
+    - Use command `help` to see all available commands.
+- View results in `results/` directory.
 
 ## Future Project Extension
 - refactor to NOT be REPL as I'm not sure this style adds any value
