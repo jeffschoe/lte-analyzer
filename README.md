@@ -1,13 +1,19 @@
 # lte-analyzer
 A CLI tool for accepting 4G LTE signal meter reports and giving an analysis of the signal quality for each carrier and associated channel based on the data.
 
-## Motivation
-I'm an engineer who utilizes a device called the [Octopus](https://www.bvsystems.com/product/octopus-4g-lte-signal-meter/) to perform cellular signal scans. These scans produce a basic report of various cellular network characteristics in an .xls format. A manual analysis of these values must be performed, usually consisting of applying formulas in Excel. My aim with this program is to apply my analysis parameters to the reports and have overall signal quality results automatically generated for me.  
+---
 
-## Requirements 
+## 🏋️ Motivation
+I'm an engineer who utilizes a device called the 🐙 [Octopus](https://www.bvsystems.com/product/octopus-4g-lte-signal-meter/) to perform cellular signal scans. These scans produce a basic report of various cellular network characteristics in an .xls format. A manual analysis of these values must be performed, usually consisting of applying formulas in Excel. My aim with this program is to apply my analysis parameters to the reports and have overall signal quality results automatically generated for me.  
+
+--- 
+
+## ✅ Requirements 
 - Python 3.12 or higher
 
-## Installation and running
+---
+
+## 🚀 Getting Started
 
 ### Option 1: Using uv (recommended)
 Install uv if you don't have it:
@@ -59,7 +65,9 @@ Run the project:
 python main.py
 ```
 
-## Usage Notes
+---
+
+## ✏️ Usage Notes
 - It is recommended to add new cellular signal reports in `reports/` before running. See above 'Populate Reports' sections above for me information.
 - Run program as described above, which opens a REPL.
 - Once inside the REPL
@@ -67,11 +75,33 @@ python main.py
     - Use command `help` to see all available commands.
 - View results in `results/` directory.
 
-## Future Project Extension
+---
+
+## 🌱 Future Project Extension
 - refactor to NOT be REPL as I'm not sure this style adds any value
 - use the argparse library for better argument integration
 - allow user to define custom analysis parameters from the repl
 - graphical output of results
 - implement a GUI
+
+---
+
+## 📄 Contributing
+
+This repo is a personal project, so contributions aren’t actively sought — but if you have suggestions or fixes, feel free to open an issue or pull request 👍
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+## 👤 Author
+
+[jeffschoe](https://github.com/jeffschoe)
+
+---
 
 
