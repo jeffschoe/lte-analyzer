@@ -78,11 +78,11 @@ python main.py
 ---
 
 ## 🌱 Future Project Extensions and Ideas
-- refactor to NOT be REPL as I'm not sure this style adds any value
-- use the argparse library for better argument integration
-- allow user to define custom analysis parameters from the repl
-- graphical output of results
-- implement a GUI
+- Refactor to NOT be REPL (REPL style does not add a lot of value).
+- Use the argparse library for better argument integration.
+- Allow user to define custom analysis parameters.
+- Add Graphical output of results.
+- Add a GUI.
 
 ---
 
