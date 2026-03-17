@@ -57,58 +57,71 @@ def main():
          
 
 def run_analyzer(verbose):
-    for report in get_report_names(verbose):
+    reports, report_count = get_report_names(verbose)
 
-        # assigns result file name, removes ".xls" suffix with new suffix
-        file_name = report.replace(".xls", f"{RESULT_FILE_NAME_SUFFIX}")
-        
-        # create data frame
-        df = pd.read_excel(f'{REPORTS_PATH}/{report}')
+    if report_count == 0: 
+        no_reports_warning()
+    else:
+        for report in reports:
 
-        # perform analysis on dataframe
-        rssi_dbm_series = df['RSSI (dBm)'] # get the data from the original report column (series)
-        rsrp_dbm_series = df['RSRP (dBm)']
-        rsrq_db_series = df['RSRQ (dB)']
+            # assigns result file name, removes ".xls" suffix with new suffix
+            file_name = report.replace(".xls", f"{RESULT_FILE_NAME_SUFFIX}")
+            
+            # create data frame
+            df = pd.read_excel(f'{REPORTS_PATH}/{report}')
 
-        rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi) # example 'GOOD', 'POOR'
-        rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rsrp)
-        rsrq_db_series_evaled = rsrq_db_series.map(eval_rsrq)
+            # perform analysis on dataframe
+            rssi_dbm_series = df['RSSI (dBm)'] # get the data from the original report column (series)
+            rsrp_dbm_series = df['RSRP (dBm)']
+            rsrq_db_series = df['RSRQ (dB)']
 
-        #rssi_evaled_rank_series = rssi_dbm_series_evaled.map(get_rank) this is not needed for current implementation
-        rsrp_evaled_rank_series = rsrp_dbm_series_evaled.map(get_rank)
-        rsrq_evaled_rank_series = rsrq_db_series_evaled.map(get_rank)
-        final_result_series = rsrp_evaled_rank_series.combine(rsrq_evaled_rank_series, get_recommendation) # `.combine` allows pairwise operations on two series
+            rssi_dbm_series_evaled = rssi_dbm_series.map(eval_rssi) # example 'GOOD', 'POOR'
+            rsrp_dbm_series_evaled = rsrp_dbm_series.map(eval_rsrp)
+            rsrq_db_series_evaled = rsrq_db_series.map(eval_rsrq)
 
-        # add results columns
-        df['RSSI (dBm) Result'] = rssi_dbm_series_evaled # example 'GOOD', 'POOR'
-        df['RSRP (dBm) Result'] = rsrp_dbm_series_evaled
-        df['RSRQ (dB) Result'] = rsrq_db_series_evaled
-        df['FINAL RESULT'] = final_result_series
+            #rssi_evaled_rank_series = rssi_dbm_series_evaled.map(get_rank) this is not needed for current implementation
+            rsrp_evaled_rank_series = rsrp_dbm_series_evaled.map(get_rank)
+            rsrq_evaled_rank_series = rsrq_db_series_evaled.map(get_rank)
+            final_result_series = rsrp_evaled_rank_series.combine(rsrq_evaled_rank_series, get_recommendation) # `.combine` allows pairwise operations on two series
 
-        # saves dataframe to .xlsx in results dir
-        df.to_excel(f'{RESULTS_PATH}/{file_name}.xlsx')
+            # add results columns
+            df['RSSI (dBm) Result'] = rssi_dbm_series_evaled # example 'GOOD', 'POOR'
+            df['RSRP (dBm) Result'] = rsrp_dbm_series_evaled
+            df['RSRQ (dB) Result'] = rsrq_db_series_evaled
+            df['FINAL RESULT'] = final_result_series
 
-        # view results in the CLI
-        if verbose:
-            print('')
-            print(f'Results for file {file_name}\n{df}')
+            # saves dataframe to .xlsx in results dir
+            df.to_excel(f'{RESULTS_PATH}/{file_name}.xlsx')
 
+            # view results in the CLI
+            if verbose:
+                print('')
+                print(f'Results for file {file_name}\n{df}')
+
+        print('')
+        print(f'✅ Success, your results are now available at {RESULTS_PATH}')
+
+
+def no_reports_warning():
     print('')
-    print(f'✅ Success, your results are now available at {RESULTS_PATH}')
+    print('⚠️  No .xls files found in your reports directory, no results generated.')
 
 
 def get_report_names(verbose):
     report_names = []
+    report_count = 0
     print('')
     for item in os.listdir(REPORTS_PATH):
         if item.endswith(".xls"): # only gets excel files
             report_names.append(item)
+            report_count+= 1
             if verbose:
                 print(f"file '{item}' found and queued")
         else: 
             if verbose:
                 print(f"file '{item}' skipped, .xls type not detected")
-    return report_names
+    
+    return report_names, report_count
 
 
 def create_results_dir():
